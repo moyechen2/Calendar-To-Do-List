@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>待办清单</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Today Flow</p>
+          <h1>把重要的事完成</h1>
+          <p class="subtitle">轻盈、清晰、专注。把任务交给清单。</p>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-label">总任务</span>
+            <span id="totalCount" class="stat-value">0</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">已完成</span>
+            <span id="doneCount" class="stat-value">0</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="panel">
+        <div class="view-tabs" role="tablist">
+          <button class="tab active" data-view="list" aria-selected="true">
+            列表
+          </button>
+          <button class="tab" data-view="calendar" aria-selected="false">
+            日历
+          </button>
+          <button class="tab" data-view="long" aria-selected="false">
+            待做
+          </button>
+        </div>
+
+        <section id="listView" class="view view-active">
+          <form id="todoForm" class="todo-form" autocomplete="off">
+            <input
+              id="todoInput"
+              type="text"
+              placeholder="写下下一件要完成的事"
+              aria-label="新增待办事项"
+              required
+            />
+            <button type="submit">添加</button>
+          </form>
+
+          <div class="list-wrap">
+            <div class="list-head">
+              <div class="filter-block">
+                <h2>待办事项</h2>
+                <div class="filter-row">
+                  <p id="filterLabel" class="filter-label">全部任务</p>
+                  <select
+                    id="filterScope"
+                    class="ghost select small"
+                    aria-label="筛选范围"
+                  >
+                    <option value="all">全部</option>
+                    <option value="today">当天</option>
+                    <option value="week">本周</option>
+                    <option value="month">本月</option>
+                    <option value="year">本年</option>
+                    <option value="date">选中日期</option>
+                  </select>
+                </div>
+              </div>
+              <div class="clear-controls">
+                <select id="clearScope" class="ghost select" aria-label="清理范围">
+                  <option value="today">当天</option>
+                  <option value="week">本周</option>
+                  <option value="month">本月</option>
+                  <option value="year">本年</option>
+                </select>
+                <button id="clearDone" class="ghost">清理已完成</button>
+                <button id="markAllDone" class="ghost">全部完成</button>
+              </div>
+            </div>
+            <ul id="todoList" class="todo-list" aria-live="polite"></ul>
+          </div>
+          <div class="list-footer">
+            <button id="goToday" class="ghost small">回到今天</button>
+            <button id="clearFilter" class="ghost small">清除筛选</button>
+          </div>
+        </section>
+
+        <section id="calendarView" class="view">
+          <div class="calendar-head">
+            <button id="prevMonth" class="ghost">上月</button>
+            <div class="calendar-selects">
+              <select id="yearSelect" class="ghost select" aria-label="选择年份"></select>
+              <select id="monthSelect" class="ghost select" aria-label="选择月份">
+                <option value="1">1月</option>
+                <option value="2">2月</option>
+                <option value="3">3月</option>
+                <option value="4">4月</option>
+                <option value="5">5月</option>
+                <option value="6">6月</option>
+                <option value="7">7月</option>
+                <option value="8">8月</option>
+                <option value="9">9月</option>
+                <option value="10">10月</option>
+                <option value="11">11月</option>
+                <option value="12">12月</option>
+              </select>
+            </div>
+            <button id="nextMonth" class="ghost">下月</button>
+          </div>
+          <div class="calendar-weekdays">
+            <span>一</span>
+            <span>二</span>
+            <span>三</span>
+            <span>四</span>
+            <span>五</span>
+            <span>六</span>
+            <span>日</span>
+          </div>
+          <div id="calendarGrid" class="calendar-grid"></div>
+        </section>
+
+        <section id="longView" class="view">
+          <form id="longForm" class="todo-form" autocomplete="off">
+            <input
+              id="longInput"
+              type="text"
+              placeholder="写下长期要推进的事项"
+              aria-label="新增长期清单"
+              required
+            />
+            <button type="submit">添加</button>
+          </form>
+          <div class="list-wrap">
+            <div class="list-head">
+              <h2>待做清单</h2>
+              <button id="clearLongDone" class="ghost">清理已完成</button>
+            </div>
+            <ul id="longList" class="todo-list" aria-live="polite"></ul>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
